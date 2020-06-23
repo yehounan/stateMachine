@@ -4,7 +4,6 @@ package com.yezi.statemachinedemo.statemachine;
 import com.yezi.statemachinedemo.business.entity.Trade;
 import com.yezi.statemachinedemo.business.enums.TradeEvent;
 import com.yezi.statemachinedemo.business.enums.TradeStatus;
-import com.yezi.statemachinedemo.statemachine.builder.TradeBuilder;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;

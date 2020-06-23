@@ -4,9 +4,7 @@ import com.yezi.statemachinedemo.business.entity.Trade;
 import com.yezi.statemachinedemo.business.enums.TradeEvent;
 import com.yezi.statemachinedemo.business.enums.TradeStatus;
 import com.yezi.statemachinedemo.statemachine.Builder;
-import com.yezi.statemachinedemo.statemachine.action.ConfirmAction;
 import com.yezi.statemachinedemo.statemachine.action.PayAction;
-import com.yezi.statemachinedemo.statemachine.action.ShipAction;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.statemachine.StateMachine;
@@ -21,17 +19,11 @@ import java.util.EnumSet;
  * @Date: 2020/6/19 17:13
  */
 @Component
-public class TradeBuilder implements Builder {
+public class PayBuilder implements Builder {
 
 
     @Autowired
     private PayAction payAction;
-
-    @Autowired
-    private ShipAction shipAction;
-
-    @Autowired
-    private ConfirmAction confirmAction;
 
 
     @Override
@@ -54,19 +46,7 @@ public class TradeBuilder implements Builder {
                 .withExternal()
                 .source(TradeStatus.TO_PAY).target(TradeStatus.TO_DELIVER)
                 .event(TradeEvent.PAY)
-                .action(payAction)
-                .and()
-                //发货 -> 收货
-                .withExternal()
-                .source(TradeStatus.TO_DELIVER).target(TradeStatus.TO_RECIEVE)
-                .event(TradeEvent.SHIP)
-                .action(shipAction)
-                .and()
-                //收货 -> 完成
-                .withExternal()
-                .source(TradeStatus.TO_RECIEVE).target(TradeStatus.COMPLETE)
-                .event(TradeEvent.CONFIRM)
-                .action(confirmAction);
+                .action(payAction);
 
         return builder.build();
     }
