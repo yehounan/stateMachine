@@ -48,6 +48,12 @@ public class TradeController {
         return "OJBK";
     }
 
+    @GetMapping("/cancel/{id}")
+    public String cancel(@PathVariable("id") Long id) {
+        tradeService.cancel(id);
+        return "OJBK";
+    }
+
 
 
 }

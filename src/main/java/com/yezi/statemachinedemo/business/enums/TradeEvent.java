@@ -8,5 +8,6 @@ package com.yezi.statemachinedemo.business.enums;
 public enum TradeEvent {
     PAY, //支付
     SHIP,//发货
-    CONFIRM//确认收货
+    CONFIRM,//确认收货
+    VOID//取消
 }

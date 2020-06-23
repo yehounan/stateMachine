@@ -13,5 +13,7 @@ public enum TradeStatus {
     //待收货
     TO_RECIEVE,
     //完成
-    COMPLETE;
+    COMPLETE,
+    //取消
+    VOID;
 }

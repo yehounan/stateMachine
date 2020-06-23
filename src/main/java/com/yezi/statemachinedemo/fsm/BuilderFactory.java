@@ -17,18 +17,18 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * @Description:
+ * @Description: 状态机工厂
  * @Author: yezi
  * @Date: 2020/6/19 17:13
  */
 @Component
 public class BuilderFactory implements InitializingBean {
 
-    private Map<TradeStatus, Builder> builderMap = new ConcurrentHashMap<>();
+    private Map<TradeStatus, TradeFSMBuilder> builderMap = new ConcurrentHashMap<>();
 
 
     @Autowired
-    private List<Builder> builders;
+    private List<TradeFSMBuilder> tradeFSMBuilders;
 
 
     @Autowired
@@ -37,14 +37,14 @@ public class BuilderFactory implements InitializingBean {
 
     public StateMachine<TradeStatus, TradeEvent> create(Trade trade) {
         TradeStatus tradeStatus = trade.getStatus();
-        Builder builder = builderMap.get(tradeStatus);
-        if (builder == null) {
+        TradeFSMBuilder tradeFSMBuilder = builderMap.get(tradeStatus);
+        if (tradeFSMBuilder == null) {
             throw new RuntimeException("构建器创建失败");
         }
         //创建订单状态机
         StateMachine<TradeStatus, TradeEvent> sm;
         try {
-            sm = builder.build(trade, beanFactory);
+            sm = tradeFSMBuilder.build(trade, beanFactory);
             sm.start();
         } catch (Exception e) {
             throw new RuntimeException("状态机创建失败");
@@ -56,6 +56,6 @@ public class BuilderFactory implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        builderMap = builders.stream().collect(Collectors.toMap(Builder::supportState, Function.identity()));
+        builderMap = tradeFSMBuilders.stream().collect(Collectors.toMap(TradeFSMBuilder::supportState, Function.identity()));
     }
 }

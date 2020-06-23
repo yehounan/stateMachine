@@ -94,4 +94,17 @@ public class TradeService {
                 .build();
         tradeFSMService.changeState(stateRequest);
     }
+
+    public void cancel(Long id) {
+        Trade trade = tradeDao.findById(id).get();
+        if (!trade.getStatus().equals(TradeStatus.TO_PAY)) {
+            //约定初始订单才能取消
+            throw new RuntimeException("订单状态异常，不能取消");
+        }
+        StateRequest stateRequest = StateRequest.builder()
+                .tid(trade.getId())
+                .event(TradeEvent.VOID)
+                .build();
+        tradeFSMService.changeState(stateRequest);
+    }
 }

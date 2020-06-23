@@ -7,20 +7,18 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.statemachine.StateMachine;
 
 /**
- * @Description:
+ * @Description: 订单状态机构建器
  * @Author: yezi
  * @Date: 2020/6/22 15:24
  */
-public interface Builder {
+public interface TradeFSMBuilder {
 
     /**
-     *
      * @return
      */
     TradeStatus supportState();
 
     /**
-     *
      * @param trade
      * @param beanFactory
      * @return

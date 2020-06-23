@@ -3,7 +3,8 @@ package com.yezi.statemachinedemo.fsm.builder;
 import com.yezi.statemachinedemo.business.entity.Trade;
 import com.yezi.statemachinedemo.business.enums.TradeEvent;
 import com.yezi.statemachinedemo.business.enums.TradeStatus;
-import com.yezi.statemachinedemo.fsm.Builder;
+import com.yezi.statemachinedemo.fsm.TradeFSMBuilder;
+import com.yezi.statemachinedemo.fsm.action.CancelAction;
 import com.yezi.statemachinedemo.fsm.action.PayAction;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,14 @@ import java.util.EnumSet;
  * @Date: 2020/6/19 17:13
  */
 @Component
-public class PayBuilder implements Builder {
+public class PayTradeFSMBuilder implements TradeFSMBuilder {
 
 
     @Autowired
     private PayAction payAction;
+
+    @Autowired
+    private CancelAction cancelAction;
 
 
     @Override
@@ -40,13 +44,22 @@ public class PayBuilder implements Builder {
                 .withStates()
                 .initial(TradeStatus.TO_PAY)
                 .states(EnumSet.allOf(TradeStatus.class));
-
+        /**
+         * 待支付状态的订单当前有2种状态流转，一个是支付之后发货，一个只取消；
+         * 2个状态是平行状态只是执行的动作不同
+         */
         builder.configureTransitions()
-                //支付 -> 发货
+                //待支付 -> 发货
                 .withExternal()
                 .source(TradeStatus.TO_PAY).target(TradeStatus.TO_DELIVER)
                 .event(TradeEvent.PAY)
-                .action(payAction);
+                .action(payAction)
+                .and()
+                //待支付 -> 取消
+                .withExternal()
+                .source(TradeStatus.TO_PAY).target(TradeStatus.VOID)
+                .event(TradeEvent.VOID)
+                .action(cancelAction);
 
         return builder.build();
     }
