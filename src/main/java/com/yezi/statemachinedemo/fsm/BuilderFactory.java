@@ -1,4 +1,4 @@
-package com.yezi.statemachinedemo.statemachine;
+package com.yezi.statemachinedemo.fsm;
 
 
 import com.yezi.statemachinedemo.business.entity.Trade;

@@ -1,4 +1,4 @@
-package com.yezi.statemachinedemo.statemachine.params;
+package com.yezi.statemachinedemo.fsm.params;
 
 import com.yezi.statemachinedemo.business.enums.TradeEvent;
 import lombok.AllArgsConstructor;

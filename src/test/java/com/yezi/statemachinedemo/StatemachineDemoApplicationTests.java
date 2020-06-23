@@ -1,8 +1,8 @@
 package com.yezi.statemachinedemo;
 
 import com.yezi.statemachinedemo.business.enums.TradeEvent;
-import com.yezi.statemachinedemo.statemachine.TradeFSMService;
-import com.yezi.statemachinedemo.statemachine.params.StateRequest;
+import com.yezi.statemachinedemo.fsm.TradeFSMService;
+import com.yezi.statemachinedemo.fsm.params.StateRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

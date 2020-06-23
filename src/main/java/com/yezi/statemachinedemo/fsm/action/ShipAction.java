@@ -1,10 +1,10 @@
-package com.yezi.statemachinedemo.statemachine.action;
+package com.yezi.statemachinedemo.fsm.action;
 
 import com.yezi.statemachinedemo.business.entity.Trade;
 import com.yezi.statemachinedemo.business.enums.TradeStatus;
-import com.yezi.statemachinedemo.statemachine.TradeAction;
-import com.yezi.statemachinedemo.statemachine.TradeStateContext;
-import com.yezi.statemachinedemo.statemachine.params.StateRequest;
+import com.yezi.statemachinedemo.fsm.TradeAction;
+import com.yezi.statemachinedemo.fsm.TradeStateContext;
+import com.yezi.statemachinedemo.fsm.params.StateRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

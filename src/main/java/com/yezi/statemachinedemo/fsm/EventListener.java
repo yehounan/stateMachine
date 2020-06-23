@@ -1,4 +1,4 @@
-package com.yezi.statemachinedemo.statemachine;
+package com.yezi.statemachinedemo.fsm;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.statemachine.annotation.OnTransition;

@@ -1,12 +1,10 @@
-package com.yezi.statemachinedemo.statemachine.builder;
+package com.yezi.statemachinedemo.fsm.builder;
 
 import com.yezi.statemachinedemo.business.entity.Trade;
 import com.yezi.statemachinedemo.business.enums.TradeEvent;
 import com.yezi.statemachinedemo.business.enums.TradeStatus;
-import com.yezi.statemachinedemo.statemachine.Builder;
-import com.yezi.statemachinedemo.statemachine.action.ConfirmAction;
-import com.yezi.statemachinedemo.statemachine.action.PayAction;
-import com.yezi.statemachinedemo.statemachine.action.ShipAction;
+import com.yezi.statemachinedemo.fsm.Builder;
+import com.yezi.statemachinedemo.fsm.action.ShipAction;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.statemachine.StateMachine;

@@ -1,10 +1,10 @@
-package com.yezi.statemachinedemo.statemachine;
+package com.yezi.statemachinedemo.fsm;
 
 
 import com.yezi.statemachinedemo.business.entity.Trade;
 import com.yezi.statemachinedemo.business.enums.TradeEvent;
 import com.yezi.statemachinedemo.business.enums.TradeStatus;
-import com.yezi.statemachinedemo.statemachine.params.StateRequest;
+import com.yezi.statemachinedemo.fsm.params.StateRequest;
 import org.springframework.statemachine.StateContext;
 import org.springframework.statemachine.StateMachine;
 

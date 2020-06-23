@@ -1,10 +1,10 @@
-package com.yezi.statemachinedemo.statemachine.builder;
+package com.yezi.statemachinedemo.fsm.builder;
 
 import com.yezi.statemachinedemo.business.entity.Trade;
 import com.yezi.statemachinedemo.business.enums.TradeEvent;
 import com.yezi.statemachinedemo.business.enums.TradeStatus;
-import com.yezi.statemachinedemo.statemachine.Builder;
-import com.yezi.statemachinedemo.statemachine.action.PayAction;
+import com.yezi.statemachinedemo.fsm.Builder;
+import com.yezi.statemachinedemo.fsm.action.ConfirmAction;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.statemachine.StateMachine;
@@ -19,16 +19,16 @@ import java.util.EnumSet;
  * @Date: 2020/6/19 17:13
  */
 @Component
-public class PayBuilder implements Builder {
+public class ConfrimBuilder implements Builder {
 
 
     @Autowired
-    private PayAction payAction;
+    private ConfirmAction confirmAction;
 
 
     @Override
     public TradeStatus supportState() {
-        return TradeStatus.TO_PAY;
+        return TradeStatus.TO_RECIEVE;
     }
 
 
@@ -38,15 +38,15 @@ public class PayBuilder implements Builder {
 
         builder.configureStates()
                 .withStates()
-                .initial(TradeStatus.TO_PAY)
+                .initial(TradeStatus.TO_RECIEVE)
                 .states(EnumSet.allOf(TradeStatus.class));
 
         builder.configureTransitions()
-                //支付 -> 发货
+                //收货 -> 完成
                 .withExternal()
-                .source(TradeStatus.TO_PAY).target(TradeStatus.TO_DELIVER)
-                .event(TradeEvent.PAY)
-                .action(payAction);
+                .source(TradeStatus.TO_RECIEVE).target(TradeStatus.COMPLETE)
+                .event(TradeEvent.CONFIRM)
+                .action(confirmAction);
 
         return builder.build();
     }
